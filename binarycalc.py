@@ -1,32 +1,64 @@
-# Binary calculator
+"""Binary Calculator"""
 
-while True:
+
+def main():
+
+    """ Main function. Where the magic happens... """
+
     binary = input("Please enter binary: ")
-    binrange = list(range(2))
     declist = []
-    decimal = 0
-    ilength = len(binary)-1
+
+    getbinary(binary, declist)
+    calcdecimal(binary, declist)
+    repeat()
+
+
+def getbinary(binary, declist):
+
+    """Get binary number"""
+
+    binrange = list(range(2))
+    ilength = len(binary) - 1
     i = 0
-    k = 0
 
     while i <= ilength:
         if int(binary[i]) in binrange:
-            declist.append(2**(ilength-i) * int(binary[i]))
-            i = i+1
+            declist.append(2 ** (ilength - i) * int(binary[i]))
+            i = i + 1
         else:
             print(binary + " is not binary!")
             break
 
     if len(declist) == len(binary):
-        while k < len(declist):
-            decimal += declist[k]
-            k += 1
-        print("Binary: " + binary + "\nDecimal: " +  str(decimal))
-    else:
-        continue
+        return declist
 
-    repeat = input("Do you want to enter another binary? (y/n)")
-    if repeat == "y":
-        continue
+
+def calcdecimal(binary, declist):
+
+    """This function calculates the decimal number."""
+
+    decimal = 0
+    i = 0
+
+    if len(declist) == len(binary):
+        while i < len(declist):
+            decimal += declist[i]
+            i += 1
+        print("Binary: " + binary + "\nDecimal: " + str(decimal))
     else:
-        break
+        exit()
+
+
+def repeat():
+
+    """ Asking the user to start over again. """
+
+    repeatit = input("Do you want to enter another binary? (y/n)")
+
+    if repeatit == "y":
+        main()
+    else:
+        exit()
+
+
+main()
